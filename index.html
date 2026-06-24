@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>주월중 2학년 추가본문 변형문제 - 지나티처</title>
+<style>
+  :root{
+    --bg:#f3f5fb; --card:#ffffff; --ink:#1f2430; --sub:#6b7280;
+    --brand:#5b6cff; --brand2:#8a63ff; --ok:#16a34a; --no:#ef4444;
+    --line:#e6e8f0; --soft:#eef1ff; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:linear-gradient(180deg,#eef1fb,#f6f7fc 240px);color:var(--ink);
+    font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+    line-height:1.6;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 60px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    box-shadow:0 8px 28px rgba(40,50,90,.07);padding:20px 18px;}
+  .brandbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .logo{width:42px;height:42px;border-radius:13px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;}
+  .brandbar h1{font-size:17px;margin:0;line-height:1.25;}
+  .brandbar p{margin:2px 0 0;font-size:12.5px;color:var(--sub);}
+  .hero h2{font-size:21px;margin:6px 0 4px;}
+  .hero .desc{color:var(--sub);font-size:14px;margin:0 0 16px;}
+  .pill{display:inline-block;background:var(--soft);color:var(--brand);
+    font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;margin:0 6px 8px 0;}
+  label.fld{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:14px 0 6px;}
+  input[type=text]{width:100%;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);
+    border-radius:12px;outline:none;background:#fbfcff;}
+  input[type=text]:focus{border-color:var(--brand);background:#fff;}
+  .btn{display:block;width:100%;border:0;cursor:pointer;font-weight:800;font-size:16px;
+    padding:15px;border-radius:13px;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 18px rgba(91,108,255,.28);margin-top:18px;}
+  .btn:active{transform:translateY(1px);}
+  .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand);box-shadow:none;}
+  .btn.kakao{background:linear-gradient(135deg,#ffe45c,#ffd400);color:#2a1d00;box-shadow:0 8px 18px rgba(255,212,0,.32);}
+  .hint{font-size:12.5px;color:var(--sub);text-align:center;margin-top:12px;}
+  .hint b{color:var(--brand);}
+
+  /* quiz */
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .topbar .who{font-size:13px;color:var(--sub);font-weight:700;}
+  .progwrap{height:9px;background:#e9ecf6;border-radius:999px;overflow:hidden;margin:4px 0 16px;}
+  .progbar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));
+    border-radius:999px;transition:width .3s;}
+  .qtag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.3px;
+    padding:4px 10px;border-radius:999px;margin-bottom:10px;}
+  .qtag.p1{background:#e6f7ee;color:#0f9d58;}
+  .qtag.p2{background:#fff0e6;color:#e8730c;}
+  .qnum{font-size:12.5px;color:var(--sub);font-weight:700;margin-bottom:8px;}
+  .qtext{font-size:17px;font-weight:700;margin:0 0 4px;}
+  .qsub{font-size:13.5px;color:var(--sub);margin:2px 0 14px;}
+  .qsub.en{font-style:italic;color:#475569;}
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+  .opt{display:flex;align-items:flex-start;gap:11px;border:1.5px solid var(--line);
+    border-radius:13px;padding:13px 13px;cursor:pointer;background:#fbfcff;transition:.12s;}
+  .opt:hover{border-color:#c9d0ff;}
+  .opt.sel{border-color:var(--brand);background:var(--soft);}
+  .opt .kbd{flex:0 0 auto;width:25px;height:25px;border-radius:8px;background:#eef1ff;
+    color:var(--brand);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .opt .otext{font-size:15px;padding-top:1px;}
+  .saWrap input{margin-top:2px;}
+  .navrow{display:flex;gap:10px;margin-top:18px;}
+  .navrow .btn{margin-top:0;}
+  .navrow .btn.half{flex:1;}
+  .enterhint{font-size:12px;color:var(--sub);text-align:center;margin-top:12px;}
+
+  /* result */
+  .scorebox{text-align:center;padding:6px 0 4px;}
+  .scorebox .big{font-size:46px;font-weight:900;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .scorebox .sub{color:var(--sub);font-size:14px;}
+  .reviewh{font-size:15px;font-weight:800;margin:20px 0 10px;}
+  .rev{border:1.5px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;}
+  .rev.wrong{border-color:#ffd5d5;background:#fff7f7;}
+  .rev.right{border-color:#d6f0df;background:#f6fef9;}
+  .rev .rtag{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:8px;}
+  .rev.wrong .rtag{background:#ffe3e3;color:#d92626;}
+  .rev.right .rtag{background:#dff5e7;color:#0f9d58;}
+  .rev .rq{font-size:14.5px;font-weight:700;margin-bottom:8px;}
+  .rev .line{font-size:13.5px;margin:3px 0;}
+  .rev .line .lb{display:inline-block;width:54px;color:var(--sub);font-weight:700;}
+  .rev .ya{color:var(--no);font-weight:700;}
+  .rev .ca{color:var(--ok);font-weight:700;}
+  .rev .exp{font-size:13px;color:#334155;background:#eef2ff;border-radius:10px;padding:9px 11px;margin-top:9px;}
+  .closing{text-align:center;font-size:18px;font-weight:900;margin:22px 0 6px;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:#1f2430;color:#fff;padding:12px 20px;border-radius:999px;font-size:14px;font-weight:700;
+    opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.25);}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .hidden{display:none!important;}
+  .passage{background:#f7f9ff;border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+    font-size:13.5px;color:#3a4152;margin-top:12px;}
+  .passage h4{margin:0 0 6px;font-size:13px;color:var(--brand);}
+  details.psg{margin-top:14px;}
+  details.psg summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--brand);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ====== START SCREEN ====== -->
+  <section id="startScreen" class="card">
+    <div class="brandbar">
+      <div class="logo">G</div>
+      <div>
+        <h1>지나티처 영어 변형문제</h1>
+        <p>주월중 2학년 · 추가본문(More Reading)</p>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>아이스크림 콘 &amp; 현명한 소비 🍦🛒</h2>
+      <p class="desc">학교 추가 프린트 본문을 변형문제로 풀며 자연스럽게 암기해요. 총 <b>24문항</b> (지문당 12문항)</p>
+      <span class="pill">⌨ Enter = 제출/다음</span>
+      <span class="pill">1·2·3·4 = 객관식 선택</span>
+      <span class="pill">정답은 끝까지 비공개</span>
+    </div>
+    <label class="fld" for="nameInput">이름을 입력해 주세요</label>
+    <input type="text" id="nameInput" placeholder="예: 염지훈" autocomplete="off">
+    <button class="btn" id="startBtn">시작하기 🚀</button>
+    <p class="hint">엔터를 누르면 바로 시작돼요. 화이팅! <b>지나티처가 응원해요 💪</b></p>
+  </section>
+
+  <!-- ====== QUIZ SCREEN ====== -->
+  <section id="quizScreen" class="card hidden">
+    <div class="topbar">
+      <span class="who" id="whoLabel">👤</span>
+      <span class="who" id="counter">1 / 24</span>
+    </div>
+    <div class="progwrap"><div class="progbar" id="progBar"></div></div>
+    <div id="qbody"></div>
+    <div class="navrow">
+      <button class="btn ghost half" id="prevBtn">← 이전</button>
+      <button class="btn half" id="nextBtn">다음 →</button>
+    </div>
+    <p class="enterhint" id="enterHint">⌨ 주관식은 <b>Enter</b>로 다음 / 객관식은 <b>숫자키</b>로 선택</p>
+  </section>
+
+  <!-- ====== RESULT SCREEN ====== -->
+  <section id="resultScreen" class="card hidden">
+    <div class="scorebox">
+      <div class="big" id="scoreBig">0 / 24</div>
+      <div class="sub" id="scoreSub"></div>
+    </div>
+    <div id="reviewArea"></div>
+    <div class="closing">수고했습니당 ~~~ ㅎㅎㅎ</div>
+    <button class="btn kakao" id="copyBtn">📋 결과 복사해서 지나티처에게 카톡 보내기</button>
+    <button class="btn ghost" id="retryBtn">🔄 다시 풀기</button>
+    <p class="hint">복사 버튼을 누르면 결과가 복사돼요. 카카오톡 지나티처 채팅방에 <b>붙여넣기</b> 하세요!</p>
+  </section>
+
+</div>
+<div class="toast" id="toast">복사되었습니다 ✅</div>
+
+<script>
+/* =========================================================
+   원본 문제 데이터 (불변). 객관식 answer는 options 원본 인덱스.
+   type: "mc"=객관식, "sa"=주관식(영어/한국어 단답)
+   ========================================================= */
+const QUESTIONS = [
+  /* ---------- 지문 1: 아이스크림 콘 (12) ---------- */
+  {p:1,type:"mc",
+   q:"윗글의 내용과 <u>일치하지 않는</u> 것은?",
+   options:[
+     "과거에는 아이스크림 콘이 존재하지 않았다.",
+     "콘 유래로 가장 널리 받아들여지는 이야기는 1904년 세인트루이스 만국박람회에서 시작됐다.",
+     "어니스트 함위(Ernest Hamwi)는 아이스크림을 팔고 있었다.",
+     "오늘날 아이스크림 콘은 전 세계에서 사랑받는다."],
+   answer:2,
+   explain:"함위는 아이스크림이 아니라 '얇고 바삭한 와플(thin, crispy waffles)'을 팔고 있었어요. 그가 와플을 콘 모양으로 말아 판매자에게 건넸죠. 나머지는 모두 본문과 일치합니다."},
+
+  {p:1,type:"mc",
+   q:"만국박람회에서 아이스크림 판매자가 겪은 '예상치 못한 문제(unexpected problem)'는?",
+   options:[
+     "깨끗한 그릇(접시)이 다 떨어졌다.",
+     "아이스크림이 너무 빨리 녹았다.",
+     "와플이 모자랐다.",
+     "손님이 한 명도 오지 않았다."],
+   answer:0,
+   explain:"He ran out of clean dishes to serve his ice cream. — 아이스크림을 담아 줄 '깨끗한 그릇이 다 떨어진' 것이 문제였어요. (run out of ~ : ~이 다 떨어지다)"},
+
+  {p:1,type:"sa",
+   q:"와플을 팔다가 콘 아이디어를 낸 사람의 이름을 <b>영어로</b> 쓰시오. (2단어)",
+   answers:["ernest hamwi","earnest hamwi","hamwi"],
+   display:"Ernest Hamwi",
+   explain:"His name was Ernest Hamwi. — 얇고 바삭한 와플을 팔던 사람이 바로 어니스트 함위(Ernest Hamwi)예요."},
+
+  {p:1,type:"sa",
+   q:"1903년에 '비슷한 콘을 만들었다'고 일부 사람들이 말하는 또 다른 인물의 이름을 <b>영어로</b> 쓰시오. (2단어)",
+   answers:["italo marchiony","marchiony"],
+   display:"Italo Marchiony",
+   explain:"Some people say another man, Italo Marchiony, made a similar cone in 1903. — 또 다른 인물은 이탈로 마르키오니(Italo Marchiony)입니다."},
+
+  {p:1,type:"mc",
+   q:"빈칸에 알맞은 말은?<br><span style='font-weight:400'>“He rolled one of his waffles into a ( &nbsp; ) shape and handed it to the seller.”</span>",
+   options:["cone","cup","ball","box"],
+   answer:0,
+   explain:"He rolled one of his waffles into a cone shape. — 와플을 '원뿔(cone)' 모양으로 말았어요. roll A into B: A를 B 모양으로 말다."},
+
+  {p:1,type:"sa",
+   q:"콘이 인기를 얻은 이유 ① 들고 다니기 쉬웠다.<br>“They were easy to ( &nbsp; ).” 빈칸에 알맞은 한 단어를 쓰시오.",
+   answers:["hold"],
+   display:"hold",
+   explain:"They were easy to hold and fun to eat! — '들고 있기(hold) 쉬웠다'가 첫 번째 인기 이유예요. easy to+동사원형: ~하기 쉬운."},
+
+  {p:1,type:"sa",
+   q:"콘이 인기를 얻은 이유 ② 먹는 재미가 있었다.<br>“They were ( &nbsp; ) to eat!” 빈칸에 알맞은 한 단어를 쓰시오.",
+   answers:["fun"],
+   display:"fun",
+   explain:"They were easy to hold and fun to eat! — '먹기에 재미있었다(fun to eat)'가 두 번째 인기 이유입니다."},
+
+  {p:1,type:"mc",
+   q:"본문에서 '콘(the cone)'이 한 역할로 알맞은 것은?",
+   options:[
+     "아이스크림을 담아 주고 바삭한 식감을 더했다.",
+     "아이스크림을 더 차갑게 유지시켰다.",
+     "아이스크림 가격을 낮춰 주었다.",
+     "아이스크림이 녹지 않게 막아 주었다."],
+   answer:0,
+   explain:"It held the ice cream and added a tasty crunch. — 콘은 아이스크림을 '담아 주고(held)' '맛있는 바삭함(a tasty crunch)'을 더해 주었어요."},
+
+  {p:1,type:"sa",
+   q:"각주 단어 <b>exist</b> 의 우리말 뜻을 쓰시오.",
+   answers:["존재하다","존재","있다"],
+   display:"존재하다",
+   explain:"In the past, however, cones did not exist. — exist는 '존재하다'. 과거에는 콘이 '존재하지 않았다'는 뜻이에요."},
+
+  {p:1,type:"mc",
+   q:"각주 단어 <b>audience</b> 의 우리말 뜻으로 알맞은 것은?",
+   options:["관중(청중)","점원","요리사","발명가"],
+   answer:0,
+   explain:"introduced the cone to a wide audience — audience는 '관중, 청중'. 콘을 '많은 사람들(wide audience)'에게 처음 선보였다는 뜻이에요."},
+
+  {p:1,type:"sa",
+   q:"빈칸을 채우시오. “Nearby, a man was selling thin, ( &nbsp; ) waffles.” (바삭한, 한 단어)",
+   answers:["crispy"],
+   display:"crispy",
+   explain:"a man was selling thin, crispy waffles — '얇고 바삭한(thin, crispy)' 와플을 팔고 있었어요. crispy: 바삭한."},
+
+  {p:1,type:"mc",
+   q:"이 글의 주제로 가장 알맞은 것은?",
+   options:[
+     "아이스크림 콘의 유래(시작된 이야기)",
+     "와플을 맛있게 만드는 방법",
+     "1904년 만국박람회의 전체 역사",
+     "건강에 좋은 디저트 고르는 법"],
+   answer:0,
+   explain:"글 전체가 '아이스크림 콘이 어떻게 생겨났는가(the invention of the ice cream cone)'를 설명하고 있어요. 따라서 주제는 '콘의 유래'입니다."},
+
+  /* ---------- 지문 2: 현명한 소비 (12) ---------- */
+  {p:2,type:"mc",
+   q:"윗글의 내용과 <u>일치하지 않는</u> 것은?",
+   options:[
+     "“지금 구매하세요”와 같은 표현은 판매자의 속임수이다.",
+     "대부분의 할인 행사는 이후 다시 진행되지 않는다.",
+     "물건 구매 전, 정말 필요한지 스스로에게 질문해야 한다.",
+     "구매 전 시간을 갖고 고민하면 더 나은 선택을 할 수 있다."],
+   answer:1,
+   explain:"Most sales come back later, so don't worry. — 대부분의 할인은 '나중에 다시 돌아온다'고 했으므로 ②는 본문과 반대예요. 그래서 일치하지 않는 답은 ②번."},
+
+  {p:2,type:"sa",
+   q:"각주 단어 <b>trick</b> 의 우리말 뜻을 쓰시오.",
+   answers:["속임수","속임","술수","트릭"],
+   display:"속임수",
+   explain:"These words are tricks — trick은 '속임수'. '한정 판매' 같은 말은 사실 속임수일 수 있다는 뜻이에요."},
+
+  {p:2,type:"sa",
+   q:"빈칸을 채우시오. “These words are ( &nbsp; ), so don't believe them right away.” (속임수, 복수형 한 단어)",
+   answers:["tricks","trick"],
+   display:"tricks",
+   explain:"These words are tricks, so don't believe them right away. — '이런 말들은 속임수(tricks)이니 바로 믿지 말라'. right away: 즉시, 곧바로."},
+
+  {p:2,type:"mc",
+   q:"현명한 소비자가 되기 위해 '먼저(First)' 스스로에게 던지라고 한 질문은?",
+   options:[
+     "“내가 정말 이게 필요한가, 아니면 기회를 놓칠까 봐 두려운 건가?”",
+     "“이게 가장 싼 가격일까?”",
+     "“나중에 환불할 수 있을까?”",
+     "“내 친구들도 이걸 가지고 있을까?”"],
+   answer:0,
+   explain:"First, ask yourself, “Do I really need this, or am I just afraid to miss the chance?” — '정말 필요한지, 아니면 기회를 놓칠까 봐 두려운 건지' 스스로 물어보라고 했어요."},
+
+  {p:2,type:"mc",
+   q:"확신이 서지 않을 때(if you're not sure) 본문이 권하는 행동은?",
+   options:[
+     "가족이나 친구와 이야기해 본다.",
+     "망설이지 말고 바로 구매한다.",
+     "더 싼 가게를 찾아본다.",
+     "그냥 사는 것을 포기한다."],
+   answer:0,
+   explain:"you can talk to your family or friends before you decide — 확신이 없으면 '결정하기 전에 가족이나 친구와 이야기해 보라'고 했어요."},
+
+  {p:2,type:"sa",
+   q:"빈칸을 채우시오. “Take your time to think ( &nbsp; ).” (두 번, 한 단어)",
+   answers:["twice"],
+   display:"twice",
+   explain:"Take your time to think twice. — '시간을 갖고 두 번(twice) 생각하라'. think twice: 신중히 생각하다."},
+
+  {p:2,type:"mc",
+   q:"멈춰 서서 생각할 때(When you stop and think) 얻을 수 있다고 한 두 가지는?",
+   options:[
+     "돈을 아끼고, 현명한 선택을 했다는 좋은 기분을 얻는다.",
+     "시간과 인기를 얻는다.",
+     "더 많은 물건과 쿠폰을 얻는다.",
+     "친구와 점원의 칭찬을 얻는다."],
+   answer:0,
+   explain:"you can save money and feel good about making smart choices — '돈을 아끼고(save money)', '현명한 선택을 한 것에 대해 좋은 기분(feel good)'을 느낄 수 있다고 했어요."},
+
+  {p:2,type:"sa",
+   q:"빈칸을 채우시오. “You will not ( &nbsp; ) a great deal even if you wait.” (놓치다, 한 단어)",
+   answers:["miss"],
+   display:"miss",
+   explain:"You will not miss a great deal even if you wait. — '기다려도 좋은 기회를 놓치지(miss) 않을 것'이라는 뜻. a great deal: 아주 좋은 거래/기회."},
+
+  {p:2,type:"mc",
+   q:"가게가 “This sale ends today!(오늘 할인 끝나요!)”라고 말할 때, 본문의 설명으로 옳은 것은?",
+   options:[
+     "같은 할인이 다음 주에 다시 돌아올 수 있다.",
+     "정말로 오늘이 마지막 기회이다.",
+     "그 가게는 곧 문을 닫는다.",
+     "그날만 가격이 두 배로 오른다."],
+   answer:0,
+   explain:"“This sale ends today!” but the same sale might return next week. — '오늘 끝난다'고 해도 같은 할인이 '다음 주에 다시 올 수 있다'고 했어요."},
+
+  {p:2,type:"sa",
+   q:"빈칸을 채우시오. “First, ask ( &nbsp; ), ‘Do I really need this?’” (너 자신에게, 한 단어)",
+   answers:["yourself"],
+   display:"yourself",
+   explain:"First, ask yourself, “Do I really need this...?” — '먼저 너 자신에게(yourself) 물어보라'. ask oneself: 스스로에게 묻다."},
+
+  {p:2,type:"sa",
+   q:"빈칸을 채우시오. “Don’t ( &nbsp; ). Take your time to think twice.” (서두르지 마라, 한 단어)",
+   answers:["hurry"],
+   display:"hurry",
+   explain:"Don’t hurry. Take your time to think twice. — ‘서두르지 마라(Don’t hurry)’. 급하게 사지 말고 시간을 갖고 천천히 생각하라는 뜻이에요."},
+
+  {p:2,type:"mc",
+   q:"이 글의 목적(주제)으로 가장 알맞은 것은?",
+   options:[
+     "현명한 소비자가 되는 방법을 알려 주려고",
+     "특정 가게의 할인 행사를 홍보하려고",
+     "와플과 아이스크림을 소개하려고",
+     "용돈을 모으는 저축 방법을 설명하려고"],
+   answer:0,
+   explain:"Here are some tips to become a smart shopper. — 글 전체가 '현명한 소비자가 되는 팁'을 알려 주므로, 목적은 '현명한 소비 방법 안내'입니다."}
+];
+
+/* 원문(복습용) */
+const PASSAGES = {
+  1:`Today, people can enjoy ice cream in a cup or in a cone. In the past, however, cones did not exist. There are many stories about the invention of the ice cream cone, but the most widely accepted one says it began at the 1904 St. Louis World's Fair. At the fair, an ice cream seller had an unexpected problem. He ran out of clean dishes to serve his ice cream. Nearby, a man was selling thin, crispy waffles. His name was Ernest Hamwi, and he noticed the ice cream seller's problem and had an idea. He rolled one of his waffles into a cone shape and handed it to the seller. The cone worked well. It held the ice cream and added a tasty crunch. Some people say another man, Italo Marchiony, made a similar cone in 1903. However, The World's Fair certainly introduced the cone to a wide audience for the first time. After the fair, cones became popular. They were easy to hold and fun to eat! Today, the ice cream cone is loved around the world.`,
+  2:`Do you want to buy something just because it says "Limited Time Only" or "Buy Now"? These words are tricks, so don't believe them right away. You will not miss a great deal even if you wait. Most sales come back later, so don't worry. For example, a store may say, "This sale ends today!" but the same sale might return next week. Here are some tips to become a smart shopper. First, ask yourself, "Do I really need this, or am I just afraid to miss the chance?" If you're not sure, you can talk to your family or friends before you decide. Also, taking a little time to think can help you a lot. Don't hurry. Take your time to think twice. When you stop and think, you can save money and feel good about making smart choices.`
+};
+
+/* ===================== 상태 ===================== */
+let RUNTIME=[];      // 셔플 반영된 런타임 문제
+let idx=0;           // 현재 문제 인덱스
+let studentName="";
+let advanceTimer=null;
+
+const $=s=>document.querySelector(s);
+const startScreen=$("#startScreen"), quizScreen=$("#quizScreen"), resultScreen=$("#resultScreen");
+
+/* 보기 섞기(Fisher-Yates) + 정답 인덱스 remap */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+function buildRuntime(){
+  RUNTIME=QUESTIONS.map(q=>{
+    const item={...q,userAnswer:null};
+    if(q.type==="mc"){
+      const order=shuffle(q.options.map((_,i)=>i));      // 인덱스 섞기
+      item.options=order.map(i=>q.options[i]);            // 섞인 보기
+      item.answer=order.indexOf(q.answer);                // 정답 새 위치
+    }
+    return item;
+  });
+}
+
+/* 답 정규화(주관식 채점용) */
+function norm(s){
+  return (s||"").toString().toLowerCase().trim()
+    .replace(/[".,!?'’‘“”]/g,"")
+    .replace(/\s+/g," ");
+}
+function isCorrect(q){
+  if(q.userAnswer===null||q.userAnswer==="") return false;
+  if(q.type==="mc") return q.userAnswer===q.answer;
+  const u=norm(q.userAnswer);
+  return q.answers.some(a=>norm(a)===u);
+}
+
+/* ===================== 시작 ===================== */
+function startQuiz(){
+  const v=$("#nameInput").value.trim();
+  studentName=v||"학생";
+  buildRuntime();
+  idx=0;
+  startScreen.classList.add("hidden");
+  resultScreen.classList.add("hidden");
+  quizScreen.classList.remove("hidden");
+  $("#whoLabel").textContent="👤 "+studentName;
+  renderQuestion();
+}
+
+/* ===================== 문제 렌더 ===================== */
+function renderQuestion(){
+  clearTimeout(advanceTimer);
+  const q=RUNTIME[idx];
+  const total=RUNTIME.length;
+  $("#counter").textContent=(idx+1)+" / "+total;
+  $("#progBar").style.width=((idx)/total*100)+"%";
+  $("#prevBtn").style.visibility = idx===0 ? "hidden":"visible";
+  $("#nextBtn").textContent = idx===total-1 ? "제출하고 결과 보기 ✅":"다음 →";
+
+  const ptag = q.p===1
+    ? '<span class="qtag p1">🍦 지문 1 · 아이스크림 콘</span>'
+    : '<span class="qtag p2">🛒 지문 2 · 현명한 소비</span>';
+
+  let html = ptag + '<div class="qnum">Q'+(idx+1)+'</div>';
+  html += '<p class="qtext">'+q.q+'</p>';
+
+  if(q.type==="mc"){
+    $("#enterHint").innerHTML="⌨ <b>숫자키 1·2·3·4</b>로 선택하면 자동으로 넘어가요";
+    html += '<div class="opts">';
+    q.options.forEach((opt,i)=>{
+      const sel = q.userAnswer===i ? " sel":"";
+      html += '<div class="opt'+sel+'" data-i="'+i+'">'
+            +   '<span class="kbd">'+(i+1)+'</span>'
+            +   '<span class="otext">'+opt+'</span>'
+            + '</div>';
+    });
+    html += '</div>';
+  } else {
+    $("#enterHint").innerHTML="⌨ 답을 입력하고 <b>Enter</b>를 누르면 다음으로 넘어가요";
+    const val = q.userAnswer? String(q.userAnswer).replace(/"/g,'&quot;'):"";
+    html += '<div class="saWrap"><input type="text" id="saInput" placeholder="여기에 답을 입력하세요" autocomplete="off" value="'+val+'"></div>';
+  }
+  $("#qbody").innerHTML=html;
+
+  if(q.type==="mc"){
+    document.querySelectorAll(".opt").forEach(el=>{
+      el.addEventListener("click",()=>selectMc(parseInt(el.dataset.i)));
+    });
+  } else {
+    const inp=$("#saInput");
+    inp.focus();
+    inp.addEventListener("keydown",e=>{
+      if(e.key==="Enter"){ e.preventDefault(); saveSa(); goNext(); }
+    });
+  }
+}
+
+/* 객관식 선택 → 하이라이트 후 0.2초 뒤 자동 다음 */
+function selectMc(i){
+  const q=RUNTIME[idx];
+  q.userAnswer=i;
+  document.querySelectorAll(".opt").forEach(el=>{
+    el.classList.toggle("sel",parseInt(el.dataset.i)===i);
+  });
+  clearTimeout(advanceTimer);
+  advanceTimer=setTimeout(goNext,200);
+}
+function saveSa(){
+  const inp=$("#saInput");
+  if(inp) RUNTIME[idx].userAnswer=inp.value.trim();
+}
+
+/* ===================== 이동 ===================== */
+function goNext(){
+  clearTimeout(advanceTimer);
+  if(RUNTIME[idx].type==="sa") saveSa();
+  if(idx>=RUNTIME.length-1){ showResult(); return; }
+  idx++; renderQuestion();
+}
+function goPrev(){
+  clearTimeout(advanceTimer);
+  if(RUNTIME[idx].type==="sa") saveSa();
+  if(idx>0){ idx--; renderQuestion(); }
+}
+
+/* ===================== 결과 ===================== */
+function showResult(){
+  clearTimeout(advanceTimer);
+  let correct=0;
+  RUNTIME.forEach(q=>{ if(isCorrect(q)) correct++; });
+  const total=RUNTIME.length;
+
+  quizScreen.classList.add("hidden");
+  resultScreen.classList.remove("hidden");
+  $("#progBar").style.width="100%";
+  window.scrollTo(0,0);
+
+  $("#scoreBig").textContent=correct+" / "+total;
+  const pct=Math.round(correct/total*100);
+  let msg;
+  if(pct===100) msg="완벽해요! 본문을 통째로 외웠네요 🏆";
+  else if(pct>=80) msg="아주 잘했어요! 조금만 더 다듬으면 만점 👍";
+  else if(pct>=60) msg="좋아요! 틀린 부분만 다시 보면 금방 올라가요 💪";
+  else msg="본문을 한 번 더 읽고 다시 도전해 봐요. 할 수 있어요! 🔥";
+  $("#scoreSub").textContent=studentName+" 학생 · 정답률 "+pct+"% · "+msg;
+
+  // 리뷰: 오답 먼저, 그 다음 정답
+  const wrongs=[], rights=[];
+  RUNTIME.forEach((q,i)=>{ (isCorrect(q)?rights:wrongs).push({q,i}); });
+
+  let html="";
+  if(wrongs.length){
+    html+='<div class="reviewh">❌ 틀린 문제 다시보기 ('+wrongs.length+')</div>';
+    wrongs.forEach(({q,i})=> html+=revCard(q,i,false));
+  }
+  if(rights.length){
+    html+='<div class="reviewh">✅ 맞힌 문제 ('+rights.length+')</div>';
+    rights.forEach(({q,i})=> html+=revCard(q,i,true));
+  }
+  // 원문 복습
+  html+='<details class="psg"><summary>📖 원문 다시 읽기 (지문 1 · 2)</summary>'
+      + '<div class="passage"><h4>지문 1 — Ice Cream Cone</h4>'+PASSAGES[1]+'</div>'
+      + '<div class="passage"><h4>지문 2 — Smart Shopper</h4>'+PASSAGES[2]+'</div></details>';
+  $("#reviewArea").innerHTML=html;
+}
+
+function userAnsText(q){
+  if(q.userAnswer===null||q.userAnswer==="") return "(무응답)";
+  if(q.type==="mc") return (q.userAnswer+1)+". "+q.options[q.userAnswer];
+  return q.userAnswer;
+}
+function correctAnsText(q){
+  if(q.type==="mc") return (q.answer+1)+". "+q.options[q.answer];
+  return q.display;
+}
+/* 문제 본문에서 태그 제거(복사·리뷰 라벨용) */
+function plain(s){ return s.replace(/<br\s*\/?>/gi," ").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim(); }
+
+function revCard(q,i,ok){
+  const ptag = q.p===1 ? "지문1·아이스크림" : "지문2·현명한소비";
+  let h='<div class="rev '+(ok?"right":"wrong")+'">';
+  h+='<span class="rtag">'+(ok?"정답":"오답")+' · Q'+(i+1)+' · '+ptag+'</span>';
+  h+='<div class="rq">'+q.q+'</div>';
+  if(!ok){
+    h+='<div class="line"><span class="lb">내 답</span><span class="ya">'+escapeHtml(userAnsText(q))+'</span></div>';
+  }
+  h+='<div class="line"><span class="lb">정답</span><span class="ca">'+escapeHtml(correctAnsText(q))+'</span></div>';
+  h+='<div class="exp">💡 '+q.explain+'</div>';
+  h+='</div>';
+  return h;
+}
+function escapeHtml(s){return (s+"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+/* ===================== 카톡 복사 텍스트 ===================== */
+function buildCopyText(){
+  let correct=0; RUNTIME.forEach(q=>{if(isCorrect(q))correct++;});
+  const total=RUNTIME.length, pct=Math.round(correct/total*100);
+  let t="";
+  t+="📚 지나티처 영어 변형문제 결과\n";
+  t+="주월중 2학년 추가본문 (아이스크림 콘 / 현명한 소비)\n";
+  t+="━━━━━━━━━━━━━━\n";
+  t+="👤 이름: "+studentName+"\n";
+  t+="🎯 점수: "+correct+" / "+total+" ("+pct+"%)\n";
+  t+="━━━━━━━━━━━━━━\n";
+
+  const wrongs=RUNTIME.map((q,i)=>({q,i})).filter(o=>!isCorrect(o.q));
+  if(wrongs.length===0){
+    t+="🎉 전부 정답! 본문을 완벽하게 외웠어요.\n";
+  }else{
+    t+="❌ 틀린 문제 ("+wrongs.length+"개)\n\n";
+    wrongs.forEach(({q,i},n)=>{
+      t+=(n+1)+") [Q"+(i+1)+" · "+(q.p===1?"지문1":"지문2")+"] "+plain(q.q)+"\n";
+      t+="   • 내 답: "+userAnsText(q)+"\n";
+      t+="   • 정답: "+correctAnsText(q)+"\n";
+      t+="   • 해설: "+q.explain+"\n\n";
+    });
+  }
+  t+="━━━━━━━━━━━━━━\n";
+  t+="수고했습니당 ~~~ ㅎㅎㅎ";
+  return t;
+}
+function copyResult(){
+  const text=buildCopyText();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showToast,()=>fallbackCopy(text));
+  }else fallbackCopy(text);
+}
+function fallbackCopy(text){
+  const ta=document.createElement("textarea");
+  ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{document.execCommand("copy");showToast();}catch(e){alert("복사에 실패했어요. 길게 눌러 직접 복사해 주세요.");}
+  document.body.removeChild(ta);
+}
+function showToast(){
+  const el=$("#toast"); el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"),1800);
+}
+
+/* ===================== 이벤트 ===================== */
+$("#startBtn").addEventListener("click",startQuiz);
+$("#nameInput").addEventListener("keydown",e=>{ if(e.key==="Enter"){e.preventDefault();startQuiz();} });
+$("#nextBtn").addEventListener("click",goNext);
+$("#prevBtn").addEventListener("click",goPrev);
+$("#copyBtn").addEventListener("click",copyResult);
+$("#retryBtn").addEventListener("click",()=>{ $("#nameInput").value=studentName; startQuiz(); });
+
+/* 전역 숫자키: 객관식일 때 1~4로 선택 */
+document.addEventListener("keydown",e=>{
+  if(quizScreen.classList.contains("hidden")) return;
+  const q=RUNTIME[idx]; if(!q||q.type!=="mc") return;
+  if(/^[1-9]$/.test(e.key)){
+    const n=parseInt(e.key)-1;
+    if(n<q.options.length){ e.preventDefault(); selectMc(n); }
+  }
+});
+</script>
+</body>
+</html>
